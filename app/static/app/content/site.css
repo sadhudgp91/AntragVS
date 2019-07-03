@@ -14,6 +14,10 @@ input,
 select,
 textarea {
     max-width: 280px;
+    width: 300px;
+    margin-right: 0.5em;
+    text-align: right;
+    display: block;
 }
 
 /* styles for validation helpers */
@@ -39,4 +43,17 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+#form11 {
+    float: left;
+    width: 500px;
+    /*height: 20px;*/
+    margin-right: 8px;
+    
+}
+
+
+#form12 {
+    margin-left: 108px;
 }
