@@ -2,32 +2,220 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1>Django</h1>
-    <p class="lead">Django is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div class="header">
+    <h1>SAP BI Benutzeranträge</h1>
+    <div class="headerLogout" >
+        <a class="log" href="{% url 'login' %}">Logout</a>
+    </div>
 </div>
+  
+<p>Willkommen {{ user.username }}!</p>
+  
+  <form action="{% url 'jobs:cost' %}"  method="POST" autocomplete="off">
+  {% csrf_token %}
+      <div class="wrapper" id="form11">
+          <input type="hidden" name="length" value="10">
+          <h1>GRUNDDATEN</h1>
+              <div id="results"></div>
+              <div class="block">		
+              <label for="searchBox">SAP Benutzer</label>
+                <input type="text" id="sapname" name="sapname" tabindex="1" onChange="searchXML();" required/>
+              </div>
+  
+              <div class="block">
+              <label>Anrede</label>
+                <select tabindex="1">
+                  <option>Frau</option>
+                  <option>Herr</option>
+                </select>
+              </div>
+        
+              <div class="block">
+              <label>Vorname</label>
+                <input type="text" id="vname" name="vname" tabindex="1" />	
+              </div>
+        
+              <div class="block">
+              <label>Nachname</label>		  
+                <input type="text" id="nname" name="nname" tabindex="1" required />
+              </div>
+        
+              <div class="block">
+              <label>InstitutsNo</label>
+               <input type="text" id="instno" name="instno" tabindex="1" />
+              </div>
+          
+              <div class="block">
+              <label>
+                Einrichtung</label>
+                <input type="text" id="einrchtng" name="einrchtng" tabindex="1" />
+              </div>
+          
+              <div class="block">
+              <label>
+                Email</label>
+               <input id="email" name="email" type="email" class="validate" tabindex="1">
+              </div>
+          
+              <div class="block">
+              <label>
+              Tel. Nebenstelle</label>
+              <input type="text" id="tel" name="tel" tabindex="1" />
+              </div>
+    
+              <div class="block">
+              <label>
+              Finanzstelle</label>
+              <input type="text" id="finanz" name="finanz" tabindex="1" />
+              </div>
+          
+              <div class="block">
+              <label>
+                Gültigkeit
+                Von:</label>
+                <input type="date" id="datepicker1" name="datepicker1" tabindex="1" />
+              </div>
+          
+              <div class="block">
+              <label>
+                Gültigkeit
+                Bis:</label>
+                <input id="datepicker2" name="datepicker2" type="date" tabindex="7">
+              </div>
+   
+              <div class="block">
+              <label>
+              <button type="button" class="submitbtn" value="Generate" onClick="generate();" >Generiere Passwort</button></label>
+              <input id="passwort" name="row_password" type="text" tabindex="7">
+              </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Django gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://djangobook.com/django-tutorials/">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.org/">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
-    </div>
-</div>
+               <div class="block">
+               <label><button type="submit" name="submit" id="submit" class="user">Benutzer zu der Liste hinzufügen!</button></label>
+               </div>
+      </div>  
+  </form>
+
+    <!-- Checkbox area -->
+  
+      <div class="wrapper" id="form12">
+      
+          <h1 class="rol">ROLLEN</h1>
+            <div class="block2" id="checks">
+              <input type="checkbox" class="filled-in" value="
+                                                      B1000_P_BI_BASISBER 
+                                                      T1000_P_BI_INFO-USER-LBV-RESTR  
+                                                      A1000_P_BI_LBV-DATEN 
+                                                      O1000_P_BI_FONDS_ALL " name="rollen" onChange="checkbox(this.value);"/>
+              <label>
+              Mittelbewirtschafter Personal DZE </label>  
+           
+            <div class="block2" id="checks">
+              <input type="checkbox" class="filled-in" value="
+                                                      B1000_P_BI_BASISBER 
+                                                      T1000_P_BI_INFO-USER-SKA 
+                                                      A1000_P_BI_SKA-DATEN 
+                                                      O1000_P_BI_ 
+                                                      O1000_P_BI_FONDS_ALL 
+                                                      O1000_P_BI_FIPOS_TITEL_RESTRIC" name="rollen" onChange="checkbox(this.value);"/>
+              <label>
+                Mittelbewirtschafter  DZE</label>
+            </div>
+            
+            <div class="block2" id="checks">
+              <input type="checkbox" class="filled-in"  value="
+                                                      B1000_P_BI_BASISBER 
+                                                      T1000_P_BI_INFO-USER-ANLA 
+                                                      A1000_P_BI_ANL-DATEN 
+                                                      O1000_P_BI_ 
+                                                      O1000_P_BI_FONDS_ALL 
+                                                      O1000_P_BI_FIPOS_TITEL_RESTRIC" name="rollen" onChange="checkbox(this.value);"/>
+              <label>
+                Inventarisierungsbeauftragter DZE </label>
+            </div>
+            
+            <div class="block2" id="checks">
+              <input type="checkbox" class="filled-in"  value="
+                                                              B1000_P_BI_BASISBER 
+                                                              T1000_P_BI_INFO-USER-BUDGET 
+                                                              A1000_P_BI_LBV-DATEN 
+                                                              O1000_P_BI_ 
+                                                              O1000_P_BI_FONDS_ALL
+                                                              O1000_P_BI_FIPOS_TITEL_RESTRIC" name="rollen" onChange="checkbox(this.value);"/>
+              <label>
+                Budgetverantwortlicher DZE </label>
+            </div>
+            
+            <div class="block2" id="checks">
+            <input type="checkbox" class="filled-in" value="
+                                                          B1000_P_BI_BASISBER
+                                                          T1000_P_BI_INFO-USER-LBV-RESTR
+                                                          T1000_P_BI_INFO-USER-LBV-RESTR 
+                                                          A1000_P_BI_LBV-DATEN
+                                                          O1000_P_BI_
+                                                          O1000_P_BI_FONDS_ALL
+                                                          O1000_P_BI_FIPOS_TITEL_RESTRIC" name="rollen" onChange="checkbox(this.value);"/>
+              <label>
+                Alle Aufgabenbereiche</label>
+            </div>
+            
+            <div class="block2" id="checks">
+              <button class="submitbtn" type="button" name="submit" onclick="finanazstelleFunction();">Finanzstelle hinzufügen</button>
+              <input type="text" class="filled" id="finanzStelle" />
+              <div id="results2"></div>
+            </div>
+            <textarea id="show" type="text" name="show" class="textarea" style="margin-left: -1px;" ></textarea>
+           
+              <button class="submitbtnrolle" type="submit" name="submit" id="save" >Mail an EDV</button><a class="modal2" href="#formModal" rel="modal:open">Org-Rolle neu</a>
+              <button class="submitbtnrolle2" type="submit" name="submit" id="save">Weitere</button>		
+              
+          
+          </div>          
+      </div>
+  
+  
+      <!-- Modal Window -->
+  
+      <div class="wrapper3" id="formModal" role="dialog" aria-labelledby="myModalLabel"  aria-hidden="true">
+          
+          <div class="block4">		
+          <label>Org Rolle</label>
+            <input type="text" id="orgrolle" name="orgrolle" tabindex="1" value="ORG_" required/>
+          </div>
+  
+          <div class="block4">
+          <label>Bezeichnung der Finanzstelle</label>
+            <input type="text" id="finanzstl" name="finanzstl" tabindex="1" />	
+          </div>
+        
+          <div class="block4">
+          <label>Funds_CTR</label>		  
+            <input type="text" id="fctr" name="fctr" tabindex="1"  />
+          
+          </div>
+        
+          <div class="block4">
+          <label>Profit_CTR</label>
+           <input type="text" id="pctr" name="pctr" value="P" tabindex="1" />
+          </div>
+          
+          <div class="block4">
+          <label>Costcenter : BT Low</label>
+           <input type="text" id="btlow" name="btlow" value="0000" tabindex="1" />
+          </div>
+          
+          <div class="block4">
+          <label>Costcenter : BT High</label>
+           <input type="text" id="bthigh" name="bthigh" value="9999" tabindex="1" />
+          </div>
+  
+          <button  type="submit" name="submit" id="submit" class="userorg">Org-Rolle zu der Liste hinzufügen!</button></label>
+      
+      </div>
+      
+      </div>
+      
+  </form>
+  
+  </body>
 
 {% endblock %}
