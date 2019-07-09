@@ -11,6 +11,18 @@
 
 - The Python Environments directory contains all the necessary packages for your application to be deployed. You can add more packages and dependencies if needed.
 (click on Manage Python Packages)
+python manage.py runserver - to run python server
+
+# Manage URLS
+
+mysite/urls.py¶
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
+]
 
 
 # Publishing an existing project to GitHub
@@ -23,3 +35,4 @@
 6. Add the URL of Git Repo created in GitHub ex. https://github.com/sadhudgp91/antragvs19.git
 7. Click Publish to Github
 8. Done!
+

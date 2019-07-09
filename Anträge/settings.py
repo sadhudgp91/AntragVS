@@ -103,6 +103,40 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django_python3_ldap.auth.LDAPBackend',
+]
+
+# LDAP Connection Settings
+LDAP_AUTH_HOST = 'ad-zvd-3.zv.uni-stuttgart.de'
+LDAP_AUTH_PORT = 389
+LDAP_AUTH_URL = 'ldaps://ad-zvd-3.zv.uni-stuttgart.de:389'.format(
+    host=LDAP_AUTH_HOST,
+    port=LDAP_AUTH_PORT,
+)
+LDAP_AUTH_CONNECTION_USERNAME = 'username'
+LDAP_AUTH_CONNECTION_PASSWORD = 'password'
+
+# Initiate TLS on connection.
+LDAP_AUTH_USE_TLS = True
+
+# The LDAP search base for looking up users.
+LDAP_AUTH_SEARCH_BASE = "ou=AC-Konten,dc=zv,dc=uni-stuttgart,dc=de"
+
+# The LDAP class that represents a user.
+LDAP_AUTH_OBJECT_CLASS = "shadowAccount"
+
+# User model fields mapped to the LDAP
+# attributes that represent them.
+LDAP_AUTH_USER_FIELDS = {
+    "username": "uid",
+}
+
+# A tuple of fields used to uniquely identify a user.
+LDAP_AUTH_USER_LOOKUP_FIELDS = ("username",)
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
@@ -115,3 +149,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+

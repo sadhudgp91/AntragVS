@@ -3,10 +3,17 @@ Definition of views.
 """
 
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from django.http import HttpRequest
-from .forms import ContractForm, DownloadForm
+from app.forms import EntryForm
+
+def ins(request):
+    form = EntryForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+
+    return render(request, 'index.html', {'form': form})
 
 
 "Kaushik: Create functions for CSV/PDF download"
@@ -45,15 +52,31 @@ def download_data(request):
         error = 'Your request has some problems.'
         contracts = error
 
-    attachment = 'contract_data.csv'
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment;filename="{}"'.format(attachment)
-    response.write(contracts)
-    return response
+        attachment = 'contract_data.csv'
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment;filename="{}"'.format(attachment)
+        response.write(contracts)
+        return response
 
 
 "Kaushik: End of Function"
 
+
+
+
+def simple_form(request):
+    if request.method == 'POST':
+        form = SimpleForm(request.POST)
+
+        if form.is_valid():
+            website = form.cleaned_data['sapname']
+            email = form.cleaned_data['vorname']
+
+            return render(request, 'index.html')
+    else:
+        form = SimpleForm()
+
+    return render(request, 'contact.html', {'form': form})
 
 
 def createpost(request):

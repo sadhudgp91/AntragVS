@@ -4,14 +4,13 @@
 
 <div class="header">
     <h1>SAP BI Benutzeranträge</h1>
-    <div class="headerLogout" >
-        <a class="log" href="{% url 'login' %}">Logout</a>
-    </div>
+  
 </div>
   
-<p>Willkommen {{ user.username }}!</p>
+
   
-<form action="#" method="POST" autocomplete="off">
+<form action="." method="POST" enctype="application/x-www-form-urlencoded" autocomplete="off">
+    {{ form.as_table }}
     {% csrf_token %}
     <div class="wrapper" id="form11">
         <input type="hidden" name="length" value="10">
@@ -90,7 +89,7 @@
             </div>
 
             <div class="block">
-            <label><button type="submit" name="submit" id="submit" class="user" value="Post"/>>Benutzer zu der Liste hinzufügen!</button></label>
+            <label><button type="submit" name="submit" id="submit" class="user" value="Post">Benutzer zu der Liste hinzufügen!</button></label>
             </div>
      </div>  
 
