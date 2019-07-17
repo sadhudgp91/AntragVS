@@ -12,6 +12,6 @@ class Post(models.Model):
     vorname= models.TextField()
 
 class grunddaten(models.Model):
-    sapkonto= models.TextField()
+    sapname= models.TextField()
     vorname= models.TextField()
-
+    idj = models.TextField()

@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Anträge.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',                      
+        'NAME': 'antrag',                      
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost',

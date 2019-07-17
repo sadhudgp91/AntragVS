@@ -25,6 +25,7 @@ urlpatterns = [
              }
          ),
          name='login'),
+    path('ins/', views.home, name='home'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
 ]

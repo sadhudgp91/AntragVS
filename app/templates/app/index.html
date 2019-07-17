@@ -9,8 +9,7 @@
   
 
   
-<form action="." method="POST" enctype="application/x-www-form-urlencoded" autocomplete="off">
-    {{ form.as_table }}
+<form action="ins/" method="POST" enctype="application/x-www-form-urlencoded" autocomplete="off">
     {% csrf_token %}
     <div class="wrapper" id="form11">
         <input type="hidden" name="length" value="10">
@@ -18,7 +17,8 @@
             <div id="results"></div>
             <div class="block">		
             <label for="searchBox">SAP Benutzer</label>
-            <input type="text" id="sapname" name="sapname" tabindex="1" onChange="searchXML();" required/>
+            <input type="text" id="sapname" name="sapname" tabindex="1" required/>
+                {{ form.sapname }}
             </div>
   
             <div class="block">
@@ -32,6 +32,7 @@
             <div class="block">
             <label>Vorname</label>
             <input type="text" id="vname" name="vorname" tabindex="1" />	
+                {{ form.vorname }}
             </div>
         
             <div class="block">
@@ -87,6 +88,8 @@
             <button type="button" class="submitbtn" value="Generate" onClick="generate();" >Generiere Passwort</button></label>
             <input id="passwort" name="row_password" type="text" tabindex="7">
             </div>
+              
+            {% csrf_token %}
 
             <div class="block">
             <label><button type="submit" name="submit" id="submit" class="user" value="Post">Benutzer zu der Liste hinzufügen!</button></label>

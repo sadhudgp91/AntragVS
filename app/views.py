@@ -5,16 +5,23 @@ Definition of views.
 from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import Post
+
 from django.http import HttpRequest
-from app.forms import EntryForm
 
 def ins(request):
-    form = EntryForm(request.POST or None)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
+    if request.method == 'POST':
+        form = DataForm(request.POST)
+        if form.is_valid():
+            sapname = request.POST.get('sapname','')
+            vorname = request.POST.get('vorname','')
+            savedata = grunddaten(sapname=sapname,vorname=vorname)
+            savedata.save()
+            return HttpResponse("Inserted SuccessFuly..")
+    else:
 
-    return render(request, 'index.html', {'form': form})
-
+        form = DataForm()
+    return render(request,'index.html',{'form':form,})
+         
 
 "Kaushik: Create functions for CSV/PDF download"
 
@@ -63,10 +70,9 @@ def download_data(request):
 
 
 
-
-def simple_form(request):
+def AuthenticationForm(request):
     if request.method == 'POST':
-        form = SimpleForm(request.POST)
+        form = AuthenticationForm(request.POST)
 
         if form.is_valid():
             website = form.cleaned_data['sapname']
@@ -74,10 +80,9 @@ def simple_form(request):
 
             return render(request, 'index.html')
     else:
-        form = SimpleForm()
+        form = AuthenticationForm()
 
     return render(request, 'contact.html', {'form': form})
-
 
 def createpost(request):
         if request.method == 'POST':
@@ -125,7 +130,7 @@ def about(request):
         'app/about.html',
         {
             'title':'About',
-            'message':'Your application description page.',
+            'message':'Your application description page goes here.',
             'year':datetime.now().year,
         }
     )
