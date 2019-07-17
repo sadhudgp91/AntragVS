@@ -13,6 +13,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
+    path('ins/', views.ins, name='grunddaten'),
     path('login/',
          LoginView.as_view
          (
@@ -25,7 +26,6 @@ urlpatterns = [
              }
          ),
          name='login'),
-    path('ins/', views.home, name='home'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
 ]

@@ -3,24 +3,25 @@ Definition of views.
 """
 
 from datetime import datetime
+from app.forms import grunddaten
 from django.shortcuts import render, redirect
-from .models import Post
+from app.models import Post
+from app.models import grunddaten
+from django.http import HttpResponse
 
 from django.http import HttpRequest
 
 def ins(request):
     if request.method == 'POST':
-        form = DataForm(request.POST)
-        if form.is_valid():
-            sapname = request.POST.get('sapname','')
-            vorname = request.POST.get('vorname','')
-            savedata = grunddaten(sapname=sapname,vorname=vorname)
-            savedata.save()
-            return HttpResponse("Inserted SuccessFuly..")
+        antragform = grunddaten(request.POST or None)
+        sapname = request.POST.get('sapname','')
+        vorname = request.POST.get('vorname','')
+        savedata = grunddaten(sapname=sapname,vorname=vorname)
+        savedata.save()
+        #return HttpResponse("Inserted Data..")
     else:
-
-        form = DataForm()
-    return render(request,'index.html',{'form':form,})
+        antragform = grunddaten()
+    return render(request,'index.html',{'form':antragform,})
          
 
 "Kaushik: Create functions for CSV/PDF download"
@@ -65,6 +66,17 @@ def download_data(request):
         response.write(contracts)
         return response
 
+
+
+def xmlparsing(request):
+    xml ="<Accounts><Account><AccountNumber>1234567</AccountNumber><Balance>$200.00</Balance></Account><Account>...</Account></Accounts>"
+    mytree = et.parse(xml)
+    myroot = mytree.getroot()
+
+    for acc in charges_root.findall('Account'):
+        acctnum = acc.find('AccountNumber').text
+        balance = acc.find('Balance').text
+        print(acctnum, balance)
 
 "Kaushik: End of Function"
 

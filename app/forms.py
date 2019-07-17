@@ -5,8 +5,7 @@ Definition of forms.
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
-
-
+from app.models import grunddaten
 
 class BootstrapAuthenticationForm(AuthenticationForm):
 
@@ -28,6 +27,6 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                    'id': 'vorname',
                                    'placeholder':'vorname'}))
 
-class grunddaten(forms.Form):
+class grunddaten(forms.ModelForm):
     sapname= forms.CharField(widget=forms.Textarea)
     vorname= forms.CharField(widget=forms.Textarea)
