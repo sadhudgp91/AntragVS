@@ -30,3 +30,11 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 class grunddaten(forms.ModelForm):
     sapname= forms.CharField(widget=forms.Textarea)
     vorname= forms.CharField(widget=forms.Textarea)
+    nachname = forms.CharField(widget=forms.Textarea)
+    instno = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={'size':'10'}))
+    einrichtung = forms.CharField(widget=forms.Textarea)
+    email = forms.CharField(widget=forms.Textarea)
+    phone = forms.CharField(widget=forms.Textarea)
+    finanzstelle = forms.CharField(widget=forms.Textarea)
+    GültigVon = forms.CharField(widget=forms.Textarea)
+    GültigBis = forms.CharField(widget=forms.Textarea)

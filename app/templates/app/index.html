@@ -27,6 +27,7 @@
                 <option>Frau</option>
                 <option>Herr</option>
             </select>
+                {{ form.anrede }}
             </div>
         
             <div class="block">
@@ -38,35 +39,41 @@
             <div class="block">
             <label>Nachname</label>		  
             <input type="text" id="nname" name="nachname" tabindex="1" required />
+                 {{ form.nachname }}
             </div>
         
             <div class="block">
             <label>InstitutsNo</label>
             <input type="text" id="instno" name="instno" tabindex="1" />
+                 {{ form.instno }}
             </div>
           
             <div class="block">
             <label>
             Einrichtung</label>
             <input type="text" id="einrchtng" name="einrchtng" tabindex="1" />
+                 {{ form.einrchtng }}
             </div>
           
             <div class="block">
             <label>
             Email</label>
             <input id="email" name="email" type="email" class="validate" tabindex="1">
+                 {{ form.email }}
             </div>
           
             <div class="block">
             <label>
             Tel. Nebenstelle</label>
             <input type="text" id="tel" name="tel" tabindex="1" />
+                 {{ form.tel }}
             </div>
     
             <div class="block">
             <label>
             Finanzstelle</label>
             <input type="text" id="finanz" name="finanz" tabindex="1" />
+                 {{ form.finanz }}
             </div>
           
             <div class="block">
@@ -74,6 +81,7 @@
             Gültigkeit
             Von:</label>
             <input type="date" id="datepicker1" name="datepicker1" tabindex="1" />
+                 {{ form.von }}
             </div>
           
             <div class="block">
@@ -81,6 +89,7 @@
             Gültigkeit
             Bis:</label>
             <input id="datepicker2" name="datepicker2" type="date" tabindex="7">
+                 {{ form.bis }}
             </div>
    
             <div class="block">

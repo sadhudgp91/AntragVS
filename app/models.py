@@ -12,4 +12,11 @@ class Post(models.Model):
 class grunddaten(models.Model):
     sapname= models.TextField()
     vorname= models.TextField()
-    idj = models.TextField()
+    nachname = models.TextField()
+    instno = models.IntegerField()
+    einrichtung = models.TextField()
+    email = models.TextField()
+    phone = models.TextField()
+    finanzstelle =models.TextField()
+    GültigVon = models.TextField()
+    GültigBis = models.TextField()
